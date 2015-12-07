@@ -1,5 +1,6 @@
 svchost: :8080
-dbuser: root
+dbuser: x10
 dbpassword: "password"
-dbhost: localhost
-dbname: Todo
+dbhost: 127.0.0.1
+dbport: 3307
+dbname: x10_data

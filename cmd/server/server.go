@@ -2,13 +2,17 @@ package main
 
 import (
 	"errors"
-	"github.com/benschw/go-todo/service"
+	"github.com/sbotman/x10/service"
 	"github.com/codegangsta/cli"
 	"gopkg.in/yaml.v1"
 	"io/ioutil"
 	"log"
 	"os"
 )
+
+
+// curl -H "Content-Type: application/json" -X POST -d '{"username":"xyz","password":"xyz"}' http://localhost:3000/api/login
+
 
 func getConfig(c *cli.Context) (service.Config, error) {
 	yamlPath := c.GlobalString("config")
@@ -30,8 +34,8 @@ func getConfig(c *cli.Context) (service.Config, error) {
 func main() {
 
 	app := cli.NewApp()
-	app.Name = "todo"
-	app.Usage = "work with the `todo` microservice"
+	app.Name = "x10device"
+	app.Usage = "work with the `x10Device` microservice"
 	app.Version = "0.0.1"
 
 	app.Flags = []cli.Flag{
@@ -41,7 +45,6 @@ func main() {
 			Usage:  "config file to use",
 			EnvVar: "APP_CONFIG",
 		},
-		//	cli.StringFlag{"config, c", "config.yaml", "config file to use", "APP_CONFIG"},
 	}
 
 	app.Commands = []cli.Command{
@@ -55,7 +58,7 @@ func main() {
 					return
 				}
 
-				svc := service.TodoService{}
+				svc := service.DeviceService{}
 
 				if err = svc.Run(cfg); err != nil {
 					log.Fatal(err)
@@ -72,7 +75,7 @@ func main() {
 					return
 				}
 
-				svc := service.TodoService{}
+				svc := service.DeviceService{}
 
 				if err = svc.Migrate(cfg); err != nil {
 					log.Fatal(err)
